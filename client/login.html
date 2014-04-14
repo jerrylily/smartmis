@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Smart V2.0</title>
+<link rel="stylesheet" href="resources/icon/style.css">
+<!--[if lte IE 7]><script src="resources/icon/lte-ie7.js"></script><![endif]-->
+<link rel="stylesheet" href="resources/css/login.css">
+<script type='text/javascript' src='resources/plugins/jquery/jquery.js'></script>
+<script type='text/javascript' src='resources/plugins/noty/snoty.js'></script>
+<script type='text/javascript' src='resources/js/common.js'></script>
+</head>
+<body>
+    <div id='login_panel'>
+        <div id='login_logo'></div>
+        <div id='login_form'>
+            <div class='form_top'>
+                <span class='login_label icon-user'></span>
+                <input id='sm_user' class='login_input' type='text'  placeholder='用户名'>
+                <span id='sm_user_lock' class='login_lock icon-lock' title='记住用户名'></span>
+            </div>
+            <div class='form_top'>
+                <span class='login_label icon-key'></span>
+                <input id='sm_pswd' class='login_input' type='password' placeholder='密码'>
+                <span id='sm_pswd_lock' class='login_lock icon-unlock' title='记住登录密码(不推荐)'></span>
+            </div>
+            <div class='form_top' style='text-align: center;'>
+                <button id='sm_login_submit' type='submit' class='login_btn login_submit'>登录</button>
+                <button id='sm_login_reset' type='button' class='login_btn login_exit'>重置</button>
+            </div>
+            {% csrf_token %}
+        </div>
+    </div>
+    
+    <div id='limit_notice'>
+        <h1>友情提示</h1>
+        <p>
+            您当前的浏览器是<span id='browser_ver'></span>,<br>
+            SMART 2的一些高级特性无法在该浏览器上使用,<br>
+            请选择使用以下浏览器访问本系统:<br>
+            1. 谷歌(Chrome)浏览器最新版（<span class='red_flag'>推荐</span>）,[<a href='http://www.google.com/intl/zh-CN/chrome/browser/'>点击下载</a>]<br>
+            2. 火狐(Firefox)浏览器最新版,[<a href='http://firefox.com.cn/download/'>点击下载</a>]<br>
+            3. 微软IE9.0以上版本浏览器<br>
+        </p>
+    </div>
+</body>
+</html>

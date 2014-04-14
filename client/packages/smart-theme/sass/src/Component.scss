@@ -1,0 +1,7 @@
+.#{$prefix}body {
+    background: theme-background-image('smart-theme-bg', 'jpg') repeat-x 50% 0;
+    background-size: cover;
+}
+.#{$prefix}border-layout-ct {
+    background-color: rgba(0, 0, 0, 0) ;
+}

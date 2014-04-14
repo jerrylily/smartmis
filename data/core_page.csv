@@ -1,0 +1,17 @@
+id,name,icon,glyph,code,is_top,module_id
+1,功能设置,icon-mimetype,xe00c,pages,0,1
+2,授权设置,icon-certificate,xe00d,authorization,0,1
+3,单位设置,icon-treediagram,xe00e,division,0,1
+4,用户设置,icon-friends,xe00f,users,0,1
+5,角色设置,icon-user,xe009,roles,0,1
+6,参数设置,icon-uniF00F,xe011,settings,0,1
+7,帮助设置,icon-faq,xe012,help,0,1
+8,用户管理,icon-friends,xe00f,users,1,2
+9,组织架构,icon-foldertree,xe013,organize,1,2
+10,客户管理,icon-men,xe014,customer,1,3
+11,客户统计,icon-stocks,xe015,statistics,1,3
+12,客户报表,icon-appointment,xe016,report,1,3
+13,行政区划,icon-treediagram,xe00e,district,1,4
+14,文章管理,icon-mailinglists,xe024,article,1,4
+15,POI管理,icon-checkin,xe025,poi,1,4
+16,Tag管理,icon-uniF482,xe026,tag,1,4

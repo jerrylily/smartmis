@@ -1,0 +1,111 @@
+.s_red {
+    color: red;
+}
+.nav-list-item {
+    font-size: 14px;
+    display: inline-block;
+    width: 100%;
+    padding: .25em .5em;
+    cursor: pointer;
+    color: #666666;
+}
+.nav-list-item:hover {
+    background: #A6A6A6 url('../images/main/nav-list-item-bg.png') no-repeat top right;
+    color: #FFFFFF;
+}
+.nav-list-item span {
+    font-size: 1.5em;
+    margin-right: 10px;
+}
+.smart-action-btn-add,.smart-action-btn-del,.smart-action-btn-more {
+    display: none;
+}
+.x-grid-row-over .smart-action-btn, .x-grid-row-selected .smart-action-btn {
+    display: inline;
+    background-image: url('../images/main/smart-row-over.png');
+    margin-left: 5px;
+}
+.x-grid-row-over .smart-action-btn-add, .x-grid-row-selected .smart-action-btn-add{
+    background-position: 0 0;
+}
+.x-grid-row-over .smart-action-btn-del, .x-grid-row-selected .smart-action-btn-del {
+    background-position: 0 -16px;
+}
+.x-grid-row-over .smart-action-btn-more, .x-grid-row-selected .smart-action-btn-more {
+    background-position: 0 -32px;
+}
+
+/* 图片缩略图样式*/
+.images-view .x-panel-body{
+    background: white;
+    font: 11px Arial, Helvetica, sans-serif;
+}
+.images-view .thumb{
+    background: #dddddd;
+    padding: 3px;
+    padding-bottom: 0;
+}
+
+.x-quirks .images-view .thumb {
+    padding-bottom: 3px;
+}
+
+.images-view .thumb img{
+    height: 65px;
+    width: 100px;
+}
+.images-view .thumb-wrap{
+    float: left;
+    margin: 4px;
+    margin-right: 0;
+    padding: 5px;
+}
+.images-view .thumb-wrap span {
+    
+    display: block;
+    overflow: hidden;
+    text-align: center;
+    width: 106px; /* for ie to ensure that the text is centered */
+}
+
+.images-view .x-item-over{
+    border:1px solid #dddddd;
+    background: #efefef url('../images/dataview/over.gif') repeat-x left top;
+    padding: 4px;
+}
+
+.images-view .x-item-selected{
+    background: #eff5fb url('../images/dataview/selected.gif') no-repeat right bottom;
+    border:1px solid #99bbe8;
+    padding: 4px;
+}
+.images-view .x-item-selected .thumb{
+    background:transparent;
+}
+
+.images-view .loading-indicator {
+    font-size:11px;
+    background-image:url('../images/grid/loading.gif');
+    background-repeat: no-repeat;
+    background-position: left;
+    padding-left:20px;
+    margin:10px;
+}
+
+.x-view-selector {
+    position:absolute;
+    left:0;
+    top:0;
+    width:0;
+    border:1px dotted;
+    opacity: .5;
+    -moz-opacity: .5;
+    filter:alpha(opacity=50);
+    zoom:1;
+    background-color:#c3daf9;
+    border-color:#3399bb;
+}
+.ext-strict .ext-ie .x-tree .x-panel-bwrap{
+    position:relative;
+    overflow:hidden;
+}

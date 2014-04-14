@@ -1,0 +1,39 @@
+.#{$prefix}form-add-trigger {
+    background-image: theme-background-image('form/add-trigger');
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}form-trigger-wrap .#{$prefix}form-add-trigger {
+        background-image: theme-background-image('form/add-trigger-rtl');
+    }
+}
+
+.#{$prefix}form-edit-trigger {
+    background-image: theme-background-image('form/edit-trigger');
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}form-trigger-wrap .#{$prefix}form-edit-trigger {
+        background-image: theme-background-image('form/edit-trigger-rtl');
+    }
+}
+
+.#{$prefix}form-map-trigger {
+    background-image: theme-background-image('form/map-trigger');
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}form-trigger-wrap .#{$prefix}form-map-trigger {
+        background-image: theme-background-image('form/map-trigger-rtl');
+    }
+}
+
+.#{$prefix}form-url-trigger {
+    background-image: theme-background-image('form/url-trigger');
+}
+
+@if $include-rtl {
+    .#{$prefix}rtl.#{$prefix}form-trigger-wrap .#{$prefix}form-url-trigger {
+        background-image: theme-background-image('form/url-trigger-rtl');
+    }
+}

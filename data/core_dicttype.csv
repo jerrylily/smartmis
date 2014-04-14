@@ -1,0 +1,13 @@
+id,name,memo
+1,gender,性别
+2,hd_custype,HD-客户类别
+3,hd_cusproperty,HD-客户性质
+4,hd_cusfrom,HD-客户来源
+5,hd_paytype,HD-结算方式
+6,hd_country,HD-客户国籍
+7,hd_city,HD-客户所在城市
+8,hd_cusphone,HD-电话类别
+9,hd_cusaddress,HD-地址类别
+10,hd_cusmilescard,HD-里程卡类别
+11,hd_cuspid,HD-证件类别
+12,gender_en,英文性别

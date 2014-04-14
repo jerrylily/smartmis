@@ -1,0 +1,14 @@
+.#{$prefix}btn-glyph:hover {
+    color: $button-toolbar-glyph-color-over;
+}
+.#{$prefix}btn-glyph, .#{$prefix}btn-inner {
+    -webkit-font-smoothing: antialiased;
+}
+// ie下 toolbar按钮背景透明
+.#{$prefix}nlg .#{$prefix}btn-default-toolbar-small, .#{$prefix}nlg .#{$prefix}btn-default-toolbar-medium, .#{$prefix}nlg .#{$prefix}btn-default-toolbar-large {
+    background-image: none;
+}
+// 顶部button颜色
+.#{$prefix}btn-plain-toolbar-large .#{$prefix}btn-glyph {
+    color: #DDD;
+}

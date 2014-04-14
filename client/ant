@@ -1,0 +1,1 @@
+sencha ant -t -after-build

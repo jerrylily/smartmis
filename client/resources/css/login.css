@@ -1,0 +1,137 @@
+html,body {
+    margin: 0;
+    padding: 0;
+}
+a {
+    color: #09f;
+}
+a:hover {
+    text-decoration: none;
+}
+body {
+    background: url(../images/smart-theme-bg.jpg) repeat-x 50% 0;
+    background-size: cover;
+    -webkit-background-size: cover;
+}
+
+#login_panel {
+    background: rgba(0,0,0,.7);
+    clear: both;
+    display: none;
+    width:400px;
+    height: 180px;
+    line-height: 50px;
+    padding: 15px 20px 0 20px;
+    margin: 0 auto;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+#login_logo {
+    background-image: url(../images/login/login_logo.png);
+    width: 126px;
+    height: 126px;
+    margin: 20px 10px 0 0;
+    float: left;
+    clear: left;
+}
+#login_form {
+    float: left;
+    clear: right;
+    width:250px;
+}
+.login_label {
+    display: block;
+    float: left;
+    color: rgba(0, 0, 0, .8);
+    font-size: 24px;
+    width: 30px;
+    height: 30px;
+    padding: 6px 0 0 6px;
+    border-radius: 5px 0 0 5px;
+    background-color: rgba(255, 255, 255, .7);
+}
+.login_input {
+    float: left;
+    background-color: rgba(255, 255, 255, .8);
+    border: none;
+    width: 168px;
+    height: 30px;
+    padding: 3px 5px;
+    font-size: 16px;
+    font-family: Microsoft yahei,微软雅黑,helvetica,arial,verdana,sans-serif;
+}
+.login_lock {
+    display: block;
+    float: left;
+    color: rgba(255, 255, 255, .5);
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    padding: 6px 0 0 6px;
+    border-radius: 0 5px 5px 0;
+    background-color: rgba(0, 0, 0, .5);
+    cursor: pointer;
+}
+.login_lock:hover {
+    color: rgba(255, 0, 0, .8);
+}
+
+.login_btn {
+    width: 80px;
+    height: 35px;
+    line-height: 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: Microsoft yahei,微软雅黑,helvetica,arial,verdana,sans-serif;
+    color: #FFF;
+    cursor: pointer;
+}
+.form_top {
+    height: 40px;
+    margin-top: 10px;
+}
+.login_submit {
+    float: right;
+    background-color: rgba(56, 146, 211, .8);
+}
+.login_exit {
+    float: left;
+    background-color: rgba(255, 154, 0, .8);
+}
+
+#limit_notice {
+    width: 400px;
+    height: 200px;
+    margin: 50px auto;
+    display: none;
+    border-radius: 10px;
+    padding: 10px;
+    background: #EEEEEE;
+    position: relative;
+    z-index: 2;
+}
+
+#limit_notice h1 {
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Microsoft yahei,微软雅黑,helvetica,arial,verdana,sans-serif;
+    color: red;
+    display: block;
+    text-align: center;
+}
+#limit_notice p {
+    display: block;
+    background-color: #FFFFFF;
+    font-size: 16px;
+    font-family: Microsoft yahei,微软雅黑,helvetica,arial,verdana,sans-serif;
+    color: gray;
+    padding: 10px;
+}
+.red_flag {
+    color: red;
+    font-weight: bold;
+}

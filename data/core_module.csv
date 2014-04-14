@@ -1,0 +1,5 @@
+id,name,glyph,code
+1,系统设置,xe00b,config
+2,管理中心,xe011,setup
+3,客户中心,xe014,hd.customer
+4,台湾自由行,xe023,tw

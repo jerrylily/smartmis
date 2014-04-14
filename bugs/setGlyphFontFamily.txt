@@ -1,0 +1,69 @@
+[U][B][COLOR="green"]REQUIRED INFORMATION[/COLOR][/B][/U]
+
+
+[B][U]Ext version tested:[/U][/B]
+[LIST][*]Ext 4.2.1[/LIST]
+
+[B][U]Browser versions tested against:[/U][/B]
+[LIST]chrome 26.0[/LIST]
+
+[B][U]Description:[/U][/B]
+[LIST][*]Ext.setGlyphFontFamily() has no effect [/LIST]
+
+[B][U]Steps to reproduce the problem:[/U][/B]
+[LIST]
+[*] Create an Ext.button.Button , configured 'glyph' with an numeric unicode character code , not use '@font family'.
+[*] In Application init function add '[COLOR="green"]Ext.setGlyphFontFamily('smart');[/COLOR]'.
+[/LIST]
+
+[B][U]The result that was expected:[/U][/B]
+[LIST][*] The button should be added the style='font-family: xxx', and the font-icon should be shown correctly.[/LIST]
+
+[B][U]The result that occurs instead:[/U][/B]
+[LIST][*] The style='font-family: xxx' not add, the font-icon becomes garbled[/LIST]
+
+[B][U]Test Case:[/U][/B]
+
+[CODE]
+items: [{
+    region: 'north',
+    xtype: 'toolbar',
+    items: [
+        {
+            scale: 'large',
+            ui: 'plain',
+            glyph: 'xe075@smart'      // ok
+        }, {
+            scale: 'large',
+            ui: 'plain',
+            glyph: 'xe0de'            // garbled
+        }, 
+    ]
+}
+[/CODE]
+
+
+[U][B][COLOR="green"]HELPFUL INFORMATION[/COLOR][/B][/U]
+
+
+[B][U]Screenshot or Video:[/U][/B]
+[LIST][*]attached[/LIST]
+
+[B]See this URL for live test case:[/B] http://
+
+
+[B][U]Debugging already done:[/U][/B]
+[LIST][*]none[/LIST]
+
+[B][U]Possible fix:[/U][/B]
+[LIST]
+[*]In ext/src/button/Button.js line 853 :
+[*]glyphFontFamily = glyphParts[1];  // if 'glyph' of button has no '@font-family', the value will allways be 'undefined' ,
+[*][Fixed] glyphFontFamily = glyphParts[1] || Ext._glyphFontFamily; // bug fixed
+[/LIST]
+
+[B][U]Additional CSS used:[/U][/B]
+[LIST][*]only default ext-all.css[*]custom css (include details)[/LIST]
+
+[B][U]Operating System:[/U][/B]
+[LIST][*]Mac OS X[/LIST]
