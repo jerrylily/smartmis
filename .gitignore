@@ -1,2 +1,7 @@
-client/build/*.*
-client/ext/*.*
+.DS_Store* 
+ehthumbs.db 
+Icon? 
+Thumbs.db 
+
+client/build/*
+client/ext/*
