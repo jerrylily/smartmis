@@ -1,6 +1,4 @@
-.DS_Store* 
-ehthumbs.db 
-Icon? 
+.DS_Store*
 Thumbs.db 
 
 client/build/*
