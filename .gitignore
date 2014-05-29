@@ -5,3 +5,4 @@ client/build/*
 client/ext/*
 
 server/static/*
+*.pyc
