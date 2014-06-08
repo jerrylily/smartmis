@@ -76,6 +76,7 @@ Ext.define('Smart.view.tw.Poi', {
                         handler: function(view, rowIndex, colIndex, item, e, record) {
                             var parent = view.up('sm_tw_poi'),
                                 form = parent.down('form'),
+                                contentBak = parent.down('#s_page_tw_poi_old_content'),
                                 aid = record.get('id');
                             // 选中当前记录
                             view.getSelectionModel().select(record);
@@ -87,6 +88,7 @@ Ext.define('Smart.view.tw.Poi', {
                                     success: function(record) {
                                         record.set('content',Ext.String.htmlDecode(record.get('content')));
                                         form.loadRecord(record);
+                                        contentBak.setValue(Ext.String.htmlDecode(record.get('contentBak')));
                                         // 加载tag内容
                                         var tag = form.down('sm_tagfield');
                                         tag.setOwnerId(aid);    // 设置所属文章ID
@@ -99,8 +101,30 @@ Ext.define('Smart.view.tw.Poi', {
                         }
                     }]
                 },
+                { text: '状态',  dataIndex: 'status', width: 90,
+                    editor: { 
+                        xtype: 'combo',
+                        allowBlank: false ,
+                        forceSelection: true,
+                        autoSelect: true,
+                        queryMode: 'local',
+                        valueField: 'value',
+                        displayField: 'name',
+                        store: 'tw.PoiStatus'
+                    },
+                    renderer: function(value){
+                        var store = Ext.getStore('tw.PoiStatus'),
+                            rec = store.findRecord('value',value);
+                        if (rec) {
+                            return rec.get('name');
+                        }
+                        else {
+                            return value;
+                        }
+                    }
+                },
                 { text: '名称', dataIndex: 'title', flex: 1, minWidth:200, editor: { xtype: 'textfield', allowBlank: false }},
-                { text: '类别',  dataIndex: 'pclass', width: 80,
+                { text: '类别',  dataIndex: 'pclass', width: 120,
                     editor: { 
                         xtype: 'combo',
                         allowBlank: false ,
@@ -110,6 +134,16 @@ Ext.define('Smart.view.tw.Poi', {
                         valueField: 'value',
                         displayField: 'name',
                         store: 'tw.PoiPclass'
+                    },
+                    renderer: function(value){
+                        var store = Ext.getStore('tw.PoiPclass'),
+                            rec = store.findRecord('value',value);
+                        if (rec) {
+                            return rec.get('name');
+                        }
+                        else {
+                            return value;
+                        }
                     }
                 },
                 { text: '权重', dataIndex: 'weight', width: 80, editor: { xtype: 'numberfield', minValue: 0, allowBlank: false }}
@@ -121,7 +155,7 @@ Ext.define('Smart.view.tw.Poi', {
         },
         {
             xtype: 'form',
-            flex: 5,
+            flex: 1,
             header: false,
             hidden: true,
             layout: {
@@ -155,7 +189,7 @@ Ext.define('Smart.view.tw.Poi', {
                 }
             ],
             bbar: [{
-                text: '取消',
+                text: '关闭',
                 glyph: 'xe005',
                 handler: function(btn) {
                     var parent = btn.up('sm_tw_poi');
@@ -171,26 +205,47 @@ Ext.define('Smart.view.tw.Poi', {
                         form = formPanel.getForm(),
                         latlng = form.findField('latlng'),
                         content = form.findField('content'),
-                        record = form.getRecord();
+                        record = form.getRecord(),
+                        contentBak = parent.down('#s_page_tw_poi_old_content');
                     
                     record.set('latlng', latlng.getValue());
                     record.set('content', Ext.String.htmlEncode(content.getValue()));
-                    record.save();
+                    record.set('contentBak', Ext.String.htmlEncode(contentBak.getValue()));
+                    record.save({
+                        success: function(batch, opts){
+                            sTop('POI点修改成功!');
+                        }
+                    });
                     
                     // 隐藏编辑面板
-                    parent.openEditPanel(false);
+                    //parent.openEditPanel(false);
+                }
+            },'->',{
+                text: '显示原始版本',
+                itemId: 's_page_tw_poi_old_btn',
+                glyph: 'xe016',
+                handler: function(btn) {
+                    var parent = btn.up('sm_tw_poi');
+                    // 打开原始记录面板
+                    parent.openOldPanel();
                 }
             }]
-        },
-        {
+        },{
             xtype: 'sm_photoview',
             title: '图片集',
-            itemId: 's_page_tw_article_photo',
+            itemId: 's_page_tw_poi_photo',
             width: 260,
             hidden: true,
             margin: '0 0 0 8',
             style: { borderLeft: '1px solid #DDDDDD' },
             photoStore: 'tw.Photo'
+        },{
+            xtype: 'sm_editor',
+            itemId: 's_page_tw_poi_old_content',
+            name: 'contentBak',
+            flex: 1,
+            margin: '0 0 0 8',
+            hidden: true
         }
     ],
     listeners: {
@@ -205,7 +260,7 @@ Ext.define('Smart.view.tw.Poi', {
                 xtype: 'combo',
                 fieldLabel: '类别',
                 labelWidth: 40,
-                width: 150,
+                width: 180,
                 queryMode: 'local',
                 valueField: 'value',
                 displayField: 'name',
@@ -267,10 +322,43 @@ Ext.define('Smart.view.tw.Poi', {
             grid.hide();
             form.show();
             photo.show();
+            me.toggleOldPanel(false);
         }else{
             grid.show();
             form.hide();
             photo.hide();
+            me.toggleOldPanel(false);
+        }
+    },
+    // 打开关闭原始文档面板
+    openOldPanel: function() {
+        var me = this,
+            grid    = me.down('sm_grid'),
+            form    = me.down('form'),
+            photo   = me.down('sm_photoview');
+            old     = me.down('#s_page_tw_poi_old_content');
+        if (old.isHidden()) {
+            grid.hide();
+            form.show();
+            photo.hide();
+            me.toggleOldPanel(true);
+        }else{
+            grid.hide();
+            form.show();
+            photo.show();
+            me.toggleOldPanel(false);
+        }
+    },
+    toggleOldPanel: function(show) {
+        var me= this,
+            old = me.down('#s_page_tw_poi_old_content'),
+            btn = me.down('#s_page_tw_poi_old_btn');
+        if (show) {
+            btn.setText('关闭原始版本');
+            old.show();
+        }else{
+            btn.setText('显示原始版本');
+            old.hide();
         }
     }
 });

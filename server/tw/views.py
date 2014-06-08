@@ -186,10 +186,15 @@ class ArticleViewSet(viewsets.ModelViewSet):
         pclass = data.get('pclass','')
         did = data.get('district',0)
         return Article.objects.filter(pclass=pclass, district_id=did).order_by('-id')
+
 class ArticleDetailViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleDetailSerializer
     renderer_classes = (SmartJSONRenderer,)
+    # 保存前所做处理
+    def pre_save(self, obj):
+        if not obj.contentBak:
+            obj.contentBak = obj.content
 
 # POI
 class PoiViewSet(viewsets.ModelViewSet):
@@ -206,6 +211,10 @@ class PoiDetailViewSet(viewsets.ModelViewSet):
     queryset = Poi.objects.all()
     serializer_class = PoiDetailSerializer
     renderer_classes = (SmartJSONRenderer,)
+    # 保存前所做处理
+    def pre_save(self, obj):
+        if not obj.contentBak:
+            obj.contentBak = obj.content
 
 class ArticlePoiViewSet(viewsets.ModelViewSet):
     queryset = Article_poi.objects.all()

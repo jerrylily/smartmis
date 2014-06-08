@@ -46,7 +46,7 @@ Ext.define('Smart.view.widget.PhotoView', {
             tpl: [
                 '<tpl for=".">',
                     '<div class="thumb-wrap" id="{name:stripTags}">',
-                        '<div class="thumb"><img src="media/{photo_100}" title="{title:htmlEncode}"></div>',
+                        '<div class="thumb"><img src="/media/{photo_100}" title="{title:htmlEncode}"></div>',
                         '<span class="x-editable">{title:htmlEncode}</span>',
                     '</div>',
                 '</tpl>',
@@ -59,7 +59,7 @@ Ext.define('Smart.view.widget.PhotoView', {
                 // 双击图片插入编辑器的光标处
                 itemdblclick: function(view, record, item, index, e, eOpts) {
                     var editor = view.up('sm_photoview').getEditor(),
-                        text = '<a href="media/'+record.get('photo_1000')+'" target="_blank"><img src="media/'+record.get('photo_500')+'"></a>';
+                        text = '<a href="media/'+record.get('photo_1000')+'" target="_blank"><img src="/media/'+record.get('photo_500')+'"></a>';
                     if (editor) editor.insertAtCursor(text);
                 }
             }
@@ -116,8 +116,8 @@ Ext.define('Smart.view.widget.PhotoView', {
                     buttonOnly: true,
                     buttonText: '',
                     buttonConfig: {
-                        //glyph: 'xe021'
-                        text: '选择'
+                        glyph: 'xe021'
+                        //text: '...'
                     },
                     //margin: '0 5 0 5',
                     regex: /^.*\.(jpeg|JPEG|jpg|JPG|png|PNG|gif|GIF)$/,
@@ -132,7 +132,7 @@ Ext.define('Smart.view.widget.PhotoView', {
                     }
                 }
             ]
-        },'->',{
+        },{
             xtype: 'button',
             tooltip: '上传',
             text: '上传',
@@ -166,6 +166,22 @@ Ext.define('Smart.view.widget.PhotoView', {
                     sTop('只允许上传格式为jpg、png、gif的图片');
                 }
                 
+            }
+        },'->',{
+            xtype: 'button',
+            tooltip: '删除图片',
+            //text: '删除',
+            glyph: 'xe004',
+            handler: function() {
+                var me = this,
+                    photoView = me.up('sm_photoview').down('dataview'),
+                    store = photoView.getStore(),
+                    rec = photoView.getSelectionModel().getLastSelected();
+                Ext.MessageBox.confirm('确认', '确定要删除当前选定的图片么？', function(btn) {
+                    if (btn == 'yes') {
+                        store.remove(rec);
+                    }
+                });
             }
         }]
     }],

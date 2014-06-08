@@ -76,6 +76,7 @@ Ext.define('Smart.view.tw.Article', {
                         handler: function(view, rowIndex, colIndex, item, e, record) {
                             var parent = view.up('sm_tw_article'),
                                 form = parent.down('form'),
+                                contentBak = parent.down('#s_page_tw_article_old_content'),
                                 aid = record.get('id');
                             // 选中当前记录
                             view.getSelectionModel().select(record);
@@ -87,6 +88,7 @@ Ext.define('Smart.view.tw.Article', {
                                     success: function(record) {
                                         record.set('content',Ext.String.htmlDecode(record.get('content')));
                                         form.loadRecord(record);
+                                        contentBak.setValue(Ext.String.htmlDecode(record.get('contentBak')));
                                         // 加载tag内容
                                         var tag = form.down('sm_tagfield');
                                         tag.setOwnerId(aid);    // 设置所属文章ID
@@ -99,6 +101,28 @@ Ext.define('Smart.view.tw.Article', {
                         }
                     }]
                 },
+                { text: '状态',  dataIndex: 'status', width: 90,
+                    editor: { 
+                        xtype: 'combo',
+                        allowBlank: false ,
+                        forceSelection: true,
+                        autoSelect: true,
+                        queryMode: 'local',
+                        valueField: 'value',
+                        displayField: 'name',
+                        store: 'tw.ArticleStatus'
+                    },
+                    renderer: function(value){
+                        var store = Ext.getStore('tw.ArticleStatus'),
+                            rec = store.findRecord('value',value);
+                        if (rec) {
+                            return rec.get('name');
+                        }
+                        else {
+                            return value;
+                        }
+                    }
+                },
                 { text: '标题', dataIndex: 'title', flex: 1, minWidth:200, editor: { xtype: 'textfield', allowBlank: false }},
                 { text: '类别',  dataIndex: 'pclass', width: 80,
                     editor: { 
@@ -110,6 +134,16 @@ Ext.define('Smart.view.tw.Article', {
                         valueField: 'value',
                         displayField: 'name',
                         store: 'tw.ArticlePclass'
+                    },
+                    renderer: function(value){
+                        var store = Ext.getStore('tw.ArticlePclass'),
+                            rec = store.findRecord('value',value);
+                        if (rec) {
+                            return rec.get('name');
+                        }
+                        else {
+                            return value;
+                        }
                     }
                 },
                 { text: '权重', dataIndex: 'weight', width: 80, editor: { xtype: 'numberfield', minValue: 0, allowBlank: false }}
@@ -174,7 +208,7 @@ Ext.define('Smart.view.tw.Article', {
                 }
             ],
             bbar: [{
-                text: '取消',
+                text: '关闭',
                 glyph: 'xe005',
                 handler: function(btn) {
                     var parent = btn.up('sm_tw_article');
@@ -190,18 +224,32 @@ Ext.define('Smart.view.tw.Article', {
                         form = formPanel.getForm(),
                         url = form.findField('copyurl'),
                         content = form.findField('content'),
-                        record = form.getRecord();
+                        record = form.getRecord(),
+                        contentBak = parent.down('#s_page_tw_article_old_content');
                     
                     record.set('copyurl', url.getValue());
                     record.set('content', Ext.String.htmlEncode(content.getValue()));
-                    record.save();
+                    record.set('contentBak', Ext.String.htmlEncode(contentBak.getValue()));
+                    record.save({
+                        success: function(batch, opts){
+                            sTop('文章修改成功!');
+                        }
+                    });
                     
                     // 隐藏编辑面板
-                    parent.openEditPanel(false);
+                    //parent.openEditPanel(false);
+                }
+            },'->',{
+                text: '显示原始版本',
+                glyph: 'xe016',
+                itemId: 's_page_tw_article_old_btn',
+                handler: function(btn) {
+                    var parent = btn.up('sm_tw_article');
+                    // 打开原始记录面板
+                    parent.openOldPanel();
                 }
             }]
-        },
-        {
+        },{
             xtype: 'sm_photoview',
             title: '图片集',
             itemId: 's_page_tw_article_photo',
@@ -210,6 +258,13 @@ Ext.define('Smart.view.tw.Article', {
             margin: '0 0 0 8',
             style: { borderLeft: '1px solid #DDDDDD' },
             photoStore: 'tw.Photo'
+        },{
+            xtype: 'sm_editor',
+            itemId: 's_page_tw_article_old_content',
+            name: 'contentBak',
+            flex: 1,
+            margin: '0 0 0 8',
+            hidden: true
         }
     ],
     listeners: {
@@ -294,11 +349,47 @@ Ext.define('Smart.view.tw.Article', {
             poi.hide();
             form.show();
             photo.show();
+            me.toggleOldPanel(false);
         }else{
             grid.show();
             poi.show();
             form.hide();
             photo.hide();
+            me.toggleOldPanel(false);
+        }
+    },
+    // 打开或关闭原始文档面板
+    openOldPanel: function(btn) {
+        var me = this,
+            grid    = me.down('sm_grid'),
+            form    = me.down('form'),
+            poi     = me.down('sm_combogrid'),
+            photo   = me.down('sm_photoview');
+            old     = me.down('#s_page_tw_article_old_content');
+        if (old.isHidden()) {
+            grid.hide();
+            poi.hide();
+            form.show();
+            photo.hide();
+            me.toggleOldPanel(true);
+        }else{
+            grid.hide();
+            poi.hide();
+            form.show();
+            photo.show();
+            me.toggleOldPanel(false);
+        }
+    },
+    toggleOldPanel: function(show) {
+        var me= this,
+            old = me.down('#s_page_tw_article_old_content'),
+            btn = me.down('#s_page_tw_article_old_btn');
+        if (show) {
+            btn.setText('关闭原始版本');
+            old.show();
+        }else{
+            btn.setText('显示原始版本');
+            old.hide();
         }
     }
 });

@@ -56,8 +56,11 @@ class Poi(models.Model):
     pclass      = models.CharField(max_length=4, blank=True)                                # 类别
     latlng      = models.CharField(max_length=128, blank=True, null=True)                   # 纬度,经度
     content     = models.TextField(blank=True, null=True)                                   # 介绍内容
+    contentBak  = models.TextField(blank=True, null=True)                                   # 介绍内容(原始档)
     weight      = models.IntegerField(default=0)                                            # 权重
     tag         = models.ManyToManyField(Tag)                                               # 标签
+    lastdate    = models.DateTimeField(blank=True, null=True, auto_now=True)                # 修改时间
+    status      = models.CharField(max_length=1, default='0')                               # 状态(0-待处理, 1-待校对, 2-待配图, 9-完毕)
     
 class Article(models.Model):
     """ 文章
@@ -69,9 +72,12 @@ class Article(models.Model):
     pclass      = models.CharField(max_length=4, blank=True)                                # 类别
     copyurl     = models.URLField(blank=True, null=True)                                    # 出处文章地址
     content     = models.TextField(blank=True, null=True)                                   # 文章内容
+    contentBak  = models.TextField(blank=True, null=True)                                   # 文章内容(原始档)
     weight      = models.IntegerField(default=0)                                            # 权重
     tag         = models.ManyToManyField(Tag)                                               # 标签
     poi         = models.ManyToManyField(Poi, through='Article_poi')                        # 所包含的兴趣点
+    lastdate    = models.DateTimeField(blank=True, null=True, auto_now=True)                # 修改时间
+    status      = models.CharField(max_length=1, default='0')                               # 状态(0-待处理, 1-待校对, 2-待配图, 9-完毕)
     
 class Article_poi(models.Model):
     """ 文章与兴趣点的对应关系表

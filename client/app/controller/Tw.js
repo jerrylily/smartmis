@@ -21,7 +21,9 @@ Ext.define('Smart.controller.Tw', {
         'tw.Article',
         'tw.Poi',
         'tw.Article_poi',
-        'tw.PoiCombobox'
+        'tw.PoiCombobox',
+        'tw.ArticleStatus',     // 文章类状态
+        'tw.PoiStatus'          // POI状态
     ],
     views: [
         'tw.District',

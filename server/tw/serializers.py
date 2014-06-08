@@ -45,22 +45,22 @@ class PhotoTitleSerializer(serializers.ModelSerializer):
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
-        fields = ('id', 'district', 'title', 'pclass', 'weight')
+        fields = ('id', 'district', 'title', 'pclass', 'weight', 'status')
         
 class ArticleDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
-        fields = ('id', 'title', 'copyurl', 'content')
+        fields = ('id', 'title', 'copyurl', 'content', 'contentBak')
 
 class PoiSerializer(serializers.ModelSerializer):
     class Meta:
         model = Poi
-        fields = ('id', 'district', 'title', 'pclass', 'weight')
+        fields = ('id', 'district', 'title', 'pclass', 'weight', 'status')
         
 class PoiDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Poi
-        fields = ('id', 'title', 'latlng', 'content')
+        fields = ('id', 'title', 'latlng', 'content', 'contentBak')
 
 class ArticlePoiSerializer(serializers.ModelSerializer):
     poiname = serializers.SerializerMethodField('get_name')

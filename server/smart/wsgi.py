@@ -15,7 +15,7 @@ framework.
 """
 import os
 import sys
-path = '/Users/jerry/work/smart2/server'
+path = '/Users/jerry/work/smartmis/server'
 if path not in sys.path:
     sys.path.append(path)
     

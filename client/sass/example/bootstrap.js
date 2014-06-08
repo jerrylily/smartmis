@@ -120,6 +120,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Smart.model.config.DivisionCombobox": [],
   "Smart.extend.column.Boolean": [],
   "Smart.view.config.Pages": [],
+  "Smart.store.tw.PoiStatus": [],
   "Smart.store.setup.Organize_users": [],
   "Smart.view.hd.customer.CustomerCard": [],
   "Smart.store.setup.Organize": [],
@@ -162,6 +163,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.ux.grid.menu.RangeMenu": [],
   "Smart.view.Test": [],
   "Ext.ux.RowExpander": [],
+  "Smart.store.tw.ArticleStatus": [],
   "Ext.ux.event.Player": [],
   "Smart.model.config.System": [],
   "Smart.model.setup.Organize": [],
@@ -389,6 +391,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Smart.view.config.Pages": [
     "widget.sm_config_pages"
   ],
+  "Smart.store.tw.PoiStatus": [],
   "Smart.store.setup.Organize_users": [],
   "Smart.view.hd.customer.CustomerCard": [
     "widget.sm_hd_customer_customercard"
@@ -453,6 +456,7 @@ Ext.ClassManager.addNameAliasMappings({
     "widget.sm_test"
   ],
   "Ext.ux.RowExpander": [],
+  "Smart.store.tw.ArticleStatus": [],
   "Ext.ux.event.Player": [],
   "Smart.model.config.System": [],
   "Smart.model.setup.Organize": [],
